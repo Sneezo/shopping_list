@@ -20,19 +20,6 @@ app.use(express.json());
 
 app.use("/assets/icons", express.static(path.join(__dirname, "../client/src/assets/icons")));
 
-app.get("/api/icons", (req, res) => {
-    const iconsDirectory = path.join(__dirname, '../client/src/assets/icons');
-
-    fs.readdir(iconsDirectory, (err, files) =>{
-        if(err){
-            return res.status(500).json({error:"failed to read icons"});
-        }
-        const iconFiles = files.filter(file => file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".webp"));
-
-        res.json(iconFiles);
-    });
-});
-
 
 db.connect(err=>{
     if(err) throw err;
@@ -40,7 +27,7 @@ db.connect(err=>{
 });
 
 app.get("/api/icons", (req, res) => {
-    const iconsDirectory = path.join(__dirname, "../client/src/assets/icons/");
+    const iconsDirectory = path.join(__dirname, "../client/src/assets/icons");
 
     fs.readdir(iconsDirectory, (err, files) =>{
         if(err){
@@ -52,44 +39,39 @@ app.get("/api/icons", (req, res) => {
     });
 });
 
-app.post("/api/products", (req,res) => {
+app.post("/api/products", async (req,res) => {
     const {name, icon} = req.body;
 
     if(!name || !icon) {
         return res.status(400).json({error: "name and icon required"});
     }
 
-    const sql = "INSERT INTO products (name, icon) VALUES (?,?)";
-    db.query(sql, [name, icon], (err, result) => {
-        if(err){
-            return res.status(500).json({error: "Failed to add"});
-        }
-        res.status(201).json({message: "product added", id: result.insertId});
-    });
+    const sql = "INSERT INTO products (name, icon) VALUES ($1,$2) RETURNING id";
+    try{
+        const result = await db.query(sql, [name,icon]);
+        res.status(201).json({message: "Product added", id:result.rows[0].id});
+    } catch (err) {
+        console.log("Failed to add product");
+        res.status(500).json({error: "Failed to add product"});
+    }
 });
 
-app.get("/api/users", (req,res) => {
-    db.query("SELECT * FROM users", (err, results) => {
-        if(err) throw err;
-        res.json(results);
-    });
+
+app.get("/api/products", async (req,res) => {
+    try{
+        const result = await db.query("SELECT * FROM products");
+        res.status(200).json(result.rows);
+    } catch {
+        console.error("Error fetching products", err);
+        res.status(500).json({error: "Failed to fetch products"});
+    }
 });
 
-app.get("/api/products", (req,res) => {
-    db.query("SELECT * FROM products", (err,results) => {
-        if(err) {
-            console.error("error fetching products", err);
-            return res.status(500).json({error:"failed to fetch products"});
-        }
-        res.status(200).json(results);
-    });
-});
-
-app.delete(`/api/products/:id`), async(req,res) => {
+app.delete(`/api/products/:id`), async (req,res) => {
     const {id} = req.params;
     try {
-        const result = await db.deleteProductById(id);
-        if(result) {
+        const result = await db.query("DELETE FROM products WHERE id = $1",[id])
+        if(result.rowCount > 0) {
             res.status(200).send({message: `Product deleted`});
         } else {
             res.status(404).send({message:`Product not found`});
