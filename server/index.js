@@ -40,15 +40,16 @@ app.get("/api/icons", (req, res) => {
 });
 
 app.post("/api/products", async (req,res) => {
-    const {name, icon} = req.body;
+    const {name, image} = req.body;
+    console.log(name, image);
 
-    if(!name || !icon) {
-        return res.status(400).json({error: "name and icon required"});
+    if(!name || !image) {
+        return res.status(400).json({error: "name and image required"});
     }
 
-    const sql = "INSERT INTO products (name, icon) VALUES ($1,$2) RETURNING id";
+    const sql = "INSERT INTO products (name, image) VALUES ($1,$2) RETURNING id";
     try{
-        const result = await db.query(sql, [name,icon]);
+        const result = await db.query(sql, [name,image]);
         res.status(201).json({message: "Product added", id:result.rows[0].id});
     } catch (err) {
         console.log("Failed to add product");

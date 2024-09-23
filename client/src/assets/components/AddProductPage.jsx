@@ -4,7 +4,7 @@ import useIcons from "../hooks/getIcons";
 import styles from "./AddProductPage.module.css";
 
 function AddProductPage(){
-    const [product, setProduct] = useState({name:"",icon:""});
+    const [product, setProduct] = useState({name:"",image:""});
     const {icons,loading,error} = useIcons();
 
     const handleInputChange = (e) => {
@@ -17,7 +17,7 @@ function AddProductPage(){
     };
 
     const setIcon = (iconurl) => {
-        setProduct({...product, icon:iconurl})
+        setProduct({...product, image:iconurl})
         console.log(product)
     }
 
@@ -33,7 +33,7 @@ function AddProductPage(){
 
         if (response.ok) {
             alert("product added");
-            setProduct({name:"", icon:""});
+            setProduct({name:"", image:""});
         } else {
             alert("error adding product");
         }

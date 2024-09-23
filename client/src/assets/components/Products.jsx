@@ -30,7 +30,7 @@ const Products = () => {
     <ul>
         {products.map(product => 
         <li key={product.id}>
-          <img className={styles.icon} src={`http://localhost:5000${product.icon}`}></img>
+          <img className={styles.icon} src={`http://localhost:5000${product.image}`}></img>
           {product.name}
           <button className={styles.deletebutton}
           onClick={() => deleteProduct(product.id)}>Delete</button>
