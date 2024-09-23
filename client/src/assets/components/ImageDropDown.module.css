@@ -1,0 +1,15 @@
+
+
+img:hover{
+    cursor: pointer;
+}
+
+.selected {
+    border: 2px solid blue;
+    border-radius: 20%;
+    height: 10em;
+}
+
+.icon {
+    height: 3em;
+}

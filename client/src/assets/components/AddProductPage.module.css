@@ -1,0 +1,50 @@
+/* Ensure the dropdown behaves like a proper dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .dropdown-selected {
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+  }
+  
+  
+  .dropdown-list {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 200px;  /* Limit the height of the dropdown */
+    overflow-y: auto;   /* Add vertical scroll if too many options */
+    z-index: 100;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Add some shadow */
+  }
+  
+  .dropdown-list li {
+    list-style: none;  /* Remove bullet points */
+    padding: 10px;
+    cursor: pointer;
+    display: flex;     /* Flexbox to align image and text horizontally */
+    align-items: center; /* Vertically center the image and text */
+  }
+  
+  .dropdown-list li:hover {
+    background-color: #f0f0f0;  /* Highlight the option on hover */
+  }
+  
+  .dropdown-list li img {
+    height: 1em;   /* Adjust the size of the icon */
+    width: 1em;    /* Ensure the icon is square */
+    margin-right: 10px;  /* Space between the icon and the text */
+  }
+  
+.selectedIcon {
+    height: 3em;
+}

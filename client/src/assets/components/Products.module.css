@@ -1,0 +1,13 @@
+.icon {
+    height: 2em;
+    vertical-align: middle;
+    background-color: transparent;
+}
+
+.deletebutton{
+    background-color: rgb(222, 92, 92);
+    border: 2px solid black;
+    border-radius: 15%;
+    overflow: hidden;
+}
+

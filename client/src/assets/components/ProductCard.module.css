@@ -1,0 +1,20 @@
+.productcardgrid {
+    display: grid;
+    place-items: center;
+    border: 2px solid black;
+    border-radius: 10%;
+    width: 75px;
+    height: fit-content;
+    overflow: hidden;
+    padding: 0;
+    gap: 0;
+}
+
+.icon {
+    width: 100%;
+}
+
+.productcarditem {
+    margin-top: 0;
+    margin-bottom: 0;
+}
