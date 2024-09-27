@@ -2,9 +2,10 @@ import React from 'react'
 import ProductCard from './ProductCard'
 
 const TestPage = () => {
+  const product = {image:"/assets/icons/agurk.webp", name:"agurk"}
   return (
     <div>
-        <ProductCard image="http://localhost:5000/assets/icons/agurk.webp" name="agurk"/>
+        <ProductCard product={product} />
     </div>
   )
 }

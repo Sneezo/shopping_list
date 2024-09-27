@@ -4,10 +4,12 @@
     border: 2px solid black;
     border-radius: 10%;
     width: 75px;
-    height: fit-content;
+    height: 120px;
     overflow: hidden;
     padding: 0;
     gap: 0;
+    justify-items: center;
+    align-items: start;
 }
 
 .icon {
@@ -17,4 +19,12 @@
 .productcarditem {
     margin-top: 0;
     margin-bottom: 0;
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 0.8rem;
+    height: auto;
+    line-height: 1.2em;
 }

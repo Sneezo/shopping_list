@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ImageDropDown from "./ImageDropDown";
-import useIcons from "../hooks/getIcons";
+import useIcons from "../hooks/useIcons";
 import styles from "./AddProductPage.module.css";
 
 function AddProductPage(){
@@ -48,8 +48,9 @@ function AddProductPage(){
                     <input type="text" name="name" value={product.name} onChange={handleInputChange}/>
                 </div>
                 <div>
-                    {product.icon? <label>Icon:<img className={styles.selectedIcon} src={`http://localhost:5000${product.icon}`}></img></label>:<label>Icon:</label>}
-                    <ImageDropDown selectedIcon={product.icon} setIcon={setIcon} icons={icons}/>
+                    {/* {product.image? <label>Icon:<img className={styles.selectedIcon} src={`http://localhost:5000${product.image}`}></img></label>:<label>Icon:</label>} */}
+                    <label>Icon:</label>
+                    <ImageDropDown selectedIcon={product.image} setIcon={setIcon} icons={icons}/>
                 </div>
                 <button type="submit">Add product</button>
             </form>

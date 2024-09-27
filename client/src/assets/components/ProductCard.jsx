@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from "./ProductCard.module.css";
 
-const ProductCard = ({image, name}) => {
+const ProductCard = ({product}) => {
   return (
     <div className={styles.productcardgrid}>
-        <img src={image} className={styles.icon}></img>
-        <h2 className={styles.productcarditem}>{name}</h2>
+        <img src={`http://localhost:5000${product.image}`} className={styles.icon}></img>
+        <h2 className={styles.productcarditem}>{product.name}</h2>
     </div>
   )
 }

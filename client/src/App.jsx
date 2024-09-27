@@ -6,6 +6,7 @@ import AddProductPage from './assets/components/AddProductPage';
 import Products from './assets/components/Products';
 import Navbar from './assets/components/Navbar';
 import TestPage from './assets/components/TestPage';
+import ShoppingListPage from './assets/components/ShoppingListPage';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/add-product" element={<AddProductPage/>}/>
         <Route path="/products" element={<Products/>}/>
         <Route path="/test" element={<TestPage/>}/>
+        <Route path="/shoppinglist" element={<ShoppingListPage/>}/>
       </Routes>
     </>
   )

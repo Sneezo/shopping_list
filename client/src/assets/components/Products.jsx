@@ -29,11 +29,13 @@ const Products = () => {
     products?
     <ul>
         {products.map(product => 
-        <li key={product.id}>
+        <li key={product.id} className={styles.productItem}>
+          <div className={styles.productContent}>
           <img className={styles.icon} src={`http://localhost:5000${product.image}`}></img>
-          {product.name}
-          <button className={styles.deletebutton}
+          <span className={styles.productName}>{product.name}</span>
+          <button className={styles.deleteButton}
           onClick={() => deleteProduct(product.id)}>Delete</button>
+          </div>
           </li>)}
     </ul>
     : <h1>No products</h1>

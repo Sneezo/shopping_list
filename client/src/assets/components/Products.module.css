@@ -4,10 +4,26 @@
     background-color: transparent;
 }
 
-.deletebutton{
-    background-color: rgb(222, 92, 92);
-    border: 2px solid black;
-    border-radius: 15%;
-    overflow: hidden;
+.deleteButton {
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+.productItem{
+    list-style-type: none;
+    margin-bottom: 15px;
+}
+
+.productContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.productName{
+    flex-grow: 1;
 }
 

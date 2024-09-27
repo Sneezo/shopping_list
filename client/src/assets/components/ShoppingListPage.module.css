@@ -1,0 +1,26 @@
+.productGrid {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 1ch;
+}
+
+.productItem{
+    list-style-type: none;
+    margin-bottom: 15px;
+}
+
+.productContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.productName{
+    flex-grow: 1;
+}
+
+.icon {
+    height: 2em;
+    vertical-align: middle;
+    background-color: transparent;
+}

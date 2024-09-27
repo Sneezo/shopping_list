@@ -57,6 +57,15 @@ app.post("/api/products", async (req,res) => {
     }
 });
 
+app.get("/api/cart", async (req, res) => {
+    try {
+        const result = await db.query("SELECT * FROM cart");
+        res.status(200).json(result.rows);
+    } catch {
+        console.error("Error fetching cart", err);
+        res.status(500).json({error: "Failed to fetch cart"})
+    }
+})
 
 app.get("/api/products", async (req,res) => {
     try{
@@ -68,7 +77,7 @@ app.get("/api/products", async (req,res) => {
     }
 });
 
-app.delete(`/api/products/:id`), async (req,res) => {
+app.delete(`/api/products/:id`, async (req,res) => {
     const {id} = req.params;
     try {
         const result = await db.query("DELETE FROM products WHERE id = $1",[id])
@@ -82,7 +91,7 @@ app.delete(`/api/products/:id`), async (req,res) => {
     catch (err) {
         res.status(500).send({message:`Error deleting product`});
     }
-}
+});
 
 app.listen(port, () => {
     console.log(`Server running @${port}`);
