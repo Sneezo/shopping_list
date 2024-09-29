@@ -2,11 +2,52 @@
     display: grid;
     grid-template-columns: auto auto auto auto;
     row-gap: 1ch;
+    border: 1px solid black;
+
 }
 
 .productItem{
     list-style-type: none;
     margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.addButton {
+    background-color: rgba(0, 128, 0, 0.548);
+    border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.removeButton{
+    background-color: rgba(255, 0, 0, 0.534);
+    border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.addButton:hover{
+    border: 2px solid green;
+}
+
+.removeButton:hover{
+    border: 2px solid red;
+}
+
+.addButton:hover, .removeButton:hover{
+    font-weight: 1000;
+}
+
+button{
+    border-radius: 8px;
+    border: 2px solid transparent;
+    font-size: 1em;
+    font-weight: 1000;
+    cursor: pointer;
+    padding: 0.6em 1.2em;
+    transition: border-color 0.25s;
+
+}
+
+.itemCount{
+    font-weight: bold;
 }
 
 .productContent {
@@ -20,7 +61,9 @@
 }
 
 .icon {
-    height: 2em;
+    height: 2.5em;
     vertical-align: middle;
     background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10%;
 }

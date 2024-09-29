@@ -67,6 +67,60 @@ app.get("/api/cart", async (req, res) => {
     }
 })
 
+app.delete("/api/cart/:id", async (req, res) => {
+    const {id} = req.params;
+
+    try{
+        const result = await db.query("DELETE FROM cart WHERE id = $1 RETURNING *", [id]);
+        if(result.rowCount === 0) {
+            return res.status(404).json({error: "Product not found in cart"});
+        }
+        res.status(200).json({message: "Product removed from cart"});
+    } catch(err) {
+        console.error("error removing ", err);
+        res.status(500).json({error: "Failed to remove product from cart"});
+    }
+})
+
+app.patch("/api/cart", async (req, res) => {
+    const { id, name, image, count } = req.body;
+  
+    if (!id || !name || !image || count === undefined) {
+      return res.status(400).json({ error: "Product ID, name, image, and count are required" });
+    }
+  
+    try {
+      // Check if the product already exists in the cart
+      const checkQuery = "SELECT * FROM cart WHERE id = $1";
+      const checkResult = await db.query(checkQuery, [id]);
+  
+      if (checkResult.rows.length > 0) {
+        // Product exists, update the count
+        const updateQuery = "UPDATE cart SET count = $1 WHERE id = $2 RETURNING *";
+        const updateResult = await db.query(updateQuery, [count, id]);
+  
+        return res.status(200).json({
+          message: "Product quantity updated",
+          product: updateResult.rows[0],
+        });
+      } else {
+        // Product doesn't exist, insert it into the cart
+        const insertQuery = "INSERT INTO cart (id, count) VALUES ($1, $2) RETURNING *";
+        const insertResult = await db.query(insertQuery, [id, count]);
+  
+        return res.status(201).json({
+          message: "Product added to cart",
+          product: insertResult.rows[0],
+        });
+      }
+    } catch (err) {
+      console.error("Error updating cart", err);
+      return res.status(500).json({ error: "Failed to update cart" });
+    }
+  });
+  
+
+
 app.get("/api/products", async (req,res) => {
     try{
         const result = await db.query("SELECT * FROM products");

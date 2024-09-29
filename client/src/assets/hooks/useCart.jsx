@@ -23,7 +23,7 @@ const useCart = () => {
     fetchCart();
   },[]);
 
-  return {cart,loading,error};
+  return {cart,setCart,loading,error};
 }
 
 export default useCart;

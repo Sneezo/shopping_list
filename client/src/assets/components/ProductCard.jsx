@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from "./ProductCard.module.css";
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, onClick}) => {
   return (
-    <div className={styles.productcardgrid}>
+    <div onClick={onClick} className={styles.productcardgrid}>
         <img src={`http://localhost:5000${product.image}`} className={styles.icon}></img>
         <h2 className={styles.productcarditem}>{product.name}</h2>
     </div>
